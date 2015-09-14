@@ -1,0 +1,33 @@
+/*!
+ * Project name: MyProject
+ * Version: 1.0
+ * Boilerplate template: projectr v1.1
+ * Author: Vedran Jaic
+ * URL: vedranjaic.com
+ */
+*:focus {
+  outline: 0; }
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: " "; }
+
+.clearfix:after {
+  clear: both; }
+
+.hide-text {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden; }
+
+.sr-only,
+.hidden {
+  display: none; }
+
+a {
+  color: green; }
+
+
+
+/*# sourceMappingURL=/style.css.map */

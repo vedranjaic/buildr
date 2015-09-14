@@ -1,0 +1,11 @@
+// PLACEHOLDERS
+// http://sass-lang.com/documentation/file.SASS_REFERENCE.html#placeholders
+
+// Text overflow
+%text-overflow {
+	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	vertical-align: top;
+}
