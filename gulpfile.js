@@ -9,26 +9,35 @@ var gulp = require('gulp'),
 // Sources
 var src = {
 	scripts: ["src/js/jquery.js", "src/js/modernizr.js", "src/js/app.js"],
+	modules: 'src/modules/**/*.html'
 	images: 'src/images/*.{gif,jpg,png,svg,ico}',
 	html: 'src/*.tpl.html',
 	sass: 'src/sass/',
 	scss: 'src/sass/**/*.scss',
-	js: 'src/js/**/*.js'
+	js: 'src/js/**/*.js',
+	// Vendors
+	bootstrapjs: 'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
+	bootstrap: 'bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss',
+	modernizr: 'bower_components/modernizr/modernizr.js',
+	jquery: 'bower_components/jquery/dist/jquery.js'
 }
 
 // Builds
 var build = {
+	scripts: ["build/assets/js/**/*.js"],
 	images: 'build/assets/images',
 	dest: 'build/',
 	html: 'build/**/*.html',
 	css: 'build/',
-	js: 'build/assets/js'
+	js: 'build/assets/js',
+	// Vendors
+	vendors: 'build/assets/js/vendors/',
 }
 
 
 
 // TASKS
-// Static server
+// Static server & watcher
 gulp.task('server', ['sass'], function() {
 
 	browserSync.init({
@@ -36,16 +45,26 @@ gulp.task('server', ['sass'], function() {
         open: false
     });
 
+	// Watch for SCSS
 	gulp.watch(src.scss, ['sass']);
+	// Watch for HTML Template files
 	gulp.watch(src.html, ['fileinclude']);
 	gulp.watch(build.html).on('change', browserSync.reload);
+	// Watch for HTML modules
+	gulp.watch(src.modules, browserSync.reload);
+	// Watch for JS
+	gulp.watch(src.js, ['scripts-js']);
+	gulp.watch(build.scripts, browserSync.reload);
 
 });
 
 // SASS
 gulp.task('sass', function () {
 
-	return sass(src.scss, {sourcemap: true})
+	return sass(src.scss, {
+			style: 'expanded',
+			sourcemap: true
+		})
 		.on('error', function (err) {
 			console.error('Error!', err.message);
 		})
@@ -74,5 +93,25 @@ gulp.task('fileinclude', function() {
 
 });
 
+// Init main script and vendors
+gulp.task('scripts-js', function() {
+
+	// Init main app.js
+	return gulp.src([src.js])
+		.pipe(gulp.dest(build.js));
+
+});
+gulp.task('scripts-vendors', function() {
+
+	// Init vendors
+	return gulp.src([src.bootstrapjs, src.modernizr])
+		.pipe(gulp.dest(build.vendors));
+
+});
+
+
 // Default
-gulp.task('default', ['sass', 'server']);
+gulp.task('default', ['sass', 'server', 'scripts-js']);
+
+// Init project
+gulp.task('init', ['scripts-js', 'scripts-vendors']);
