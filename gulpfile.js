@@ -9,7 +9,7 @@ var gulp = require('gulp'),
 // Sources
 var src = {
 	scripts: ["src/js/jquery.js", "src/js/modernizr.js", "src/js/app.js"],
-	modules: 'src/modules/**/*.html'
+	modules: 'src/modules/**/*.html',
 	images: 'src/images/*.{gif,jpg,png,svg,ico}',
 	html: 'src/*.tpl.html',
 	sass: 'src/sass/',
