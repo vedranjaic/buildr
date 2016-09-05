@@ -3,6 +3,9 @@
 // RWD
 // http://css-tricks.com/media-queries-sass-3-2-and-codekit/
 @mixin breakpoint($point) {
+	@if $point == xl {
+		@media (min-width: 1400px) { @content; }
+	}
 	@if $point == lg {
 		@media (min-width: 1200px) { @content; }
 	}
@@ -25,6 +28,13 @@
 	}
 	@else if $position == portrait {
 		@media only screen and (orientation : portrait) { @content; }
+	}
+}
+
+// Firefox only hacks
+@mixin firefox {
+	@-moz-document url-prefix() {
+		@content
 	}
 }
 
@@ -61,15 +71,68 @@
 	}
 }
 
+// Animations
+@mixin transition {
+	transition: all 300ms;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+// Collapser
+@mixin collapser {
+	&[aria-expanded="false"] {
+		.collapser {
+			@include transition;
+			transform: rotate(-180deg);
+		}
+	}
+	&[aria-expanded="true"] {
+		.collapser {
+			@include transition;
+		}
+	}
+	&:hover,
+	&:focus {
+		text-decoration: none;
+	}
+}
+
 // Font size
 @mixin font-size($size: 12, $base: 16) {
 	font-size: $size + px;
 	font-size: ($size / $base) * 1rem;
 }
 
-// Opacity
+// IE Opacity
 @mixin opacity($opacity) {
 	opacity: $opacity;
 	$opacity-ie: $opacity * 100;
 	filter: alpha(opacity=$opacity-ie); //IE8
+}
+
+// Checkboxes
+@mixin checkbox($color, $box, $checkmark) {
+	label {
+		color: $color;
+	}
+	input[type=checkbox] + label:before {
+		content: $box;
+	}
+	input[type=checkbox]:checked + label:before {
+		content: $checkmark;
+	}
+}
+
+// Radio buttons
+@mixin radio($color-radio, $circle, $radio) {
+	label {
+		color: $color-radio;
+	}
+	input[type=radio] + label:before {
+		content: $circle;
+	}
+	input[type=radio]:checked + label:before {
+		content: $radio;
+	}
 }

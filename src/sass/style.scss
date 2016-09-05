@@ -1,7 +1,7 @@
 /*!
  * Project name: MyProject
  * Version: 1.0
- * Boilerplate template: projectr v1.1
+ * Boilerplate template: buildr v0.4
  * Author: Vedran Jaic
  * URL: vedranjaic.com
  */
@@ -14,9 +14,11 @@
 @import "mixins";
 @import "helpers";
 @import "placeholders";
+@import "touch-events";
 
 // Animations
 @import "animations";
+@import "theme";
 
 // ------------------------------------[ style.css start ]
 
