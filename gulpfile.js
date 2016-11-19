@@ -137,8 +137,10 @@ gulp.task('bootstrapp-sass-folder', function() {
 });
 
 
-// Default
-gulp.task('default', ['sass', 'server', 'app-js']);
-
-// Init project
+// --- [ INIT PROJECT ]
+// gulp init
 gulp.task('init', ['app-js', 'js-vendors', 'bootstrapp-sass', 'bootstrapp-sass-folder']);
+
+// --- [ DEFAULT TASK ]
+// gulp
+gulp.task('default', ['sass', 'server', 'app-js']);
