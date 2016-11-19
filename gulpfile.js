@@ -4,10 +4,12 @@ var gulp = require('gulp'),
 	browserSync = require('browser-sync').create(),
 	sass = require('gulp-ruby-sass'),
 	sourcemaps = require('gulp-sourcemaps'),
+	autoprefixer = require('gulp-autoprefixer');
 	fileinclude = require("gulp-file-include");
 
 // Sources
 var src = {
+	bootstrap: 'src/sass/bootstrap/',
 	scripts: ["src/js/jquery.js", "src/js/modernizr.js", "src/js/app.js"],
 	modules: 'src/modules/**/*.html',
 	images: 'src/images/*.{gif,jpg,png,svg,ico}',
@@ -16,10 +18,11 @@ var src = {
 	scss: 'src/sass/**/*.scss',
 	js: 'src/js/**/*.js',
 	// Vendors
-	bootstrapjs: 'bower_components/bootstrap-sass/assets/javascripts/bootstrap.js',
-	bootstrap: 'bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss',
+	bootstrapsassfolder: 'bower_components/bootstrap-sass/assets/stylesheets/bootstrap/**/*.*',
+	bootstrapsass: 'bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss',
+	bootstrapjs: 'bower_components/bootstrap-sass/assets/javascripts/bootstrap.min.js',
 	modernizr: 'bower_components/modernizr/modernizr.js',
-	jquery: 'bower_components/jquery/dist/jquery.js'
+	jquery: 'bower_components/jquery/dist/jquery.min.js'
 }
 
 // Builds
@@ -36,7 +39,7 @@ var build = {
 
 
 
-// TASKS
+// --- [ TASKS ]
 // Static server & watcher
 gulp.task('server', ['sass'], function() {
 
@@ -58,7 +61,8 @@ gulp.task('server', ['sass'], function() {
 
 });
 
-// SASS
+// --- [ SASS ]
+// Sass, Error handling, Autoprefixer and sourcemaps
 gulp.task('sass', function () {
 
 	return sass(src.scss, {
@@ -68,6 +72,10 @@ gulp.task('sass', function () {
 		.on('error', function (err) {
 			console.error('Error!', err.message);
 		})
+		.pipe(autoprefixer({
+			browsers: ['last 4 versions'],
+			cascade: false
+		}))
 		.pipe(sourcemaps.write('/', {
 			includeContent: false,
 			sourceRoot: '/'
@@ -76,7 +84,8 @@ gulp.task('sass', function () {
 		.pipe(browserSync.stream({match: '**/*.css'}));
 });
 
-// Fileinclude
+// --- [ FILEINCLUDE ]
+// Fileinclude and rename files
 gulp.task('fileinclude', function() {
 	
 	return gulp.src([src.html])
@@ -94,24 +103,42 @@ gulp.task('fileinclude', function() {
 });
 
 // Init main script and vendors
-gulp.task('scripts-js', function() {
+gulp.task('app-js', function() {
 
 	// Init main app.js
 	return gulp.src([src.js])
 		.pipe(gulp.dest(build.js));
 
 });
-gulp.task('scripts-vendors', function() {
+gulp.task('js-vendors', function() {
 
 	// Init vendors
-	return gulp.src([src.bootstrapjs, src.modernizr])
+	return gulp.src([
+			src.bootstrapjs, 
+			src.modernizr,
+			src.jquery
+		])
 		.pipe(gulp.dest(build.vendors));
+
+});
+gulp.task('bootstrapp-sass', function() {
+
+	// Init vendors
+	return gulp.src([src.bootstrapsass])
+		.pipe(gulp.dest(src.sass));
+
+});
+gulp.task('bootstrapp-sass-folder', function() {
+
+	// Init vendors
+	return gulp.src([src.bootstrapsassfolder])
+		.pipe(gulp.dest(src.bootstrap));
 
 });
 
 
 // Default
-gulp.task('default', ['sass', 'server', 'scripts-js']);
+gulp.task('default', ['sass', 'server', 'app-js']);
 
 // Init project
-gulp.task('init', ['scripts-js', 'scripts-vendors']);
+gulp.task('init', ['app-js', 'js-vendors', 'bootstrapp-sass', 'bootstrapp-sass-folder']);
