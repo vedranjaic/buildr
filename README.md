@@ -13,5 +13,8 @@ Application builder template
 - run `gulp` to start server and first build
 - save any `*.html` file to build html and refresh browser page, and any `*.scss` file to compile css
 
+## Production
+- run `gulp production` to minify css, combine and minify js, optimize images
+
 ### ToDo:
 - gulp-w3cjs [https://www.npmjs.com/package/gulp-w3cjs/](https://www.npmjs.com/package/gulp-w3cjs/)
