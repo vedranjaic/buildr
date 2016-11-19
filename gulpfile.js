@@ -4,7 +4,7 @@ var gulp = require('gulp'),
 	browserSync = require('browser-sync').create(),
 	sass = require('gulp-ruby-sass'),
 	sourcemaps = require('gulp-sourcemaps'),
-	autoprefixer = require('gulp-autoprefixer');
+	autoprefixer = require('gulp-autoprefixer'),
 	fileinclude = require("gulp-file-include");
 
 // Sources
@@ -34,7 +34,7 @@ var build = {
 	css: 'build/',
 	js: 'build/assets/js',
 	// Vendors
-	vendors: 'build/assets/js/vendors/',
+	vendors: 'build/assets/js/vendors/'
 }
 
 
@@ -52,14 +52,16 @@ gulp.task('server', ['sass'], function() {
 	gulp.watch(src.scss, ['sass']);
 	// Watch for HTML Template files
 	gulp.watch(src.html, ['fileinclude']);
-	gulp.watch(build.html).on('change', browserSync.reload);
 	// Watch for HTML modules
-	gulp.watch(src.modules, browserSync.reload);
+	gulp.watch(src.modules, ['fileinclude']);
+	gulp.watch(build.html).on('change', browserSync.reload);
 	// Watch for JS
-	gulp.watch(src.js, ['scripts-js']);
+	gulp.watch(src.js, ['app-js']);
 	gulp.watch(build.scripts, browserSync.reload);
 
 });
+
+
 
 // --- [ SASS ]
 // Sass, Error handling, Autoprefixer and sourcemaps
@@ -84,6 +86,8 @@ gulp.task('sass', function () {
 		.pipe(browserSync.stream({match: '**/*.css'}));
 });
 
+
+
 // --- [ FILEINCLUDE ]
 // Fileinclude and rename files
 gulp.task('fileinclude', function() {
@@ -102,16 +106,17 @@ gulp.task('fileinclude', function() {
 
 });
 
+
+
+// --- [ INIT FRAMEWORKS & SCRIPTS ]
 // Init main script and vendors
 gulp.task('app-js', function() {
-
 	// Init main app.js
 	return gulp.src([src.js])
 		.pipe(gulp.dest(build.js));
-
 });
+// Javascript vendors
 gulp.task('js-vendors', function() {
-
 	// Init vendors
 	return gulp.src([
 			src.bootstrapjs, 
@@ -119,28 +124,29 @@ gulp.task('js-vendors', function() {
 			src.jquery
 		])
 		.pipe(gulp.dest(build.vendors));
-
 });
-gulp.task('bootstrapp-sass', function() {
-
+// Bootstrap sass and folder
+gulp.task('bootstrap-sass', function() {
 	// Init vendors
 	return gulp.src([src.bootstrapsass])
 		.pipe(gulp.dest(src.sass));
-
 });
-gulp.task('bootstrapp-sass-folder', function() {
-
+gulp.task('bootstrap-sass-folder', function() {
 	// Init vendors
 	return gulp.src([src.bootstrapsassfolder])
 		.pipe(gulp.dest(src.bootstrap));
-
 });
+
 
 
 // --- [ INIT PROJECT ]
 // gulp init
-gulp.task('init', ['app-js', 'js-vendors', 'bootstrapp-sass', 'bootstrapp-sass-folder']);
+gulp.task('init', ['app-js', 'js-vendors', 'bootstrap-sass', 'bootstrap-sass-folder']);
+
+
 
 // --- [ DEFAULT TASK ]
 // gulp
 gulp.task('default', ['sass', 'server', 'app-js']);
+
+
