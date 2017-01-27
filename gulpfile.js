@@ -210,9 +210,9 @@ gulp.task('bootstrap-sass-folder', function() {
 
 
 
-// --- [ INIT PROJECT ]
-// gulp init - Copies main app.js file, Bootstrap scss and js, jQuery, Modernizr, images and SVGs
-gulp.task('init', ['app-js', 'js-vendors', 'bootstrap-sass', 'bootstrap-sass-folder', 'images']);
+// --- [ INSTALL PROJECT ]
+// gulp install - Copies main app.js file, Bootstrap scss and js, jQuery, Modernizr, images and SVGs
+gulp.task('install', ['app-js', 'js-vendors', 'bootstrap-sass', 'bootstrap-sass-folder', 'images']);
 
 
 // --- [ PRODUCTION DEPLOY ]

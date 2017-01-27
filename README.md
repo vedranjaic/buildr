@@ -2,12 +2,12 @@
 Application builder template
 
 ## Installation
-- cd into your working directory and `git clone http://github.com/vedranjaic/buildr`
-- rename `buildr` folder name and remove its `.git` folder from inside
-- cd into your new app directory
+- cd into your working directory and `git clone git@github.com:vedranjaic/buildr newApp`
+- cd into your newApp directory
+- remove git folder with `rm -rf .git`
 - `npm install` will install all gulp modules
 - `bower install` will pull all vendor frameworks and scripts
-- `gulp init` will copy main app.js, bower frameworks and vendors scripts into build/ and working directories
+- `gulp install` will copy main app.js, bower frameworks and vendors scripts into build/ and working directories
 
 ## Starting the app
 - run `gulp` to start server and first build
