@@ -3,10 +3,13 @@ $black: #161616;
 $white: #ffffff;
 
 // Functional colors
-$func-yellow: #ffca3a;
-$func-green: #8dc63f;
-$func-blue: #1982c4;
-$func-red: #ff595e;
+$functional: (
+	yellow: #ffca3a,
+	green: #8dc63f,
+	blue: #1982c4,
+	red: #ff595e
+);
+
 
 // Brand colors
 
