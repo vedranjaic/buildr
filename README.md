@@ -18,3 +18,6 @@ Application builder template
 
 ### ToDo:
 - gulp-w3cjs [https://www.npmjs.com/package/gulp-w3cjs/](https://www.npmjs.com/package/gulp-w3cjs/)
+
+### v0.62
+- `transition` now specifies which property to pass (past: all)

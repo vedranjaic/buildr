@@ -1,10 +1,14 @@
 /*!
  * Project name: MyProject
  * Version: 1.0
- * Boilerplate template: buildr v0.5
+ * Boilerplate template: buildr v0.62
  * Author: Vedran Jaic
  * URL: vedranjaic.com
  */
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
 *:focus {
   outline: 0;
 }
@@ -36,7 +40,7 @@
 }
 
 a {
-  color: #1982c4;
+  color: currentColor;
 }
 
 

@@ -1,7 +1,7 @@
 /*!
  * Project name: MyProject
  * Version: 1.0
- * Boilerplate template: buildr v0.61
+ * Boilerplate template: buildr v0.62
  * Author: Vedran Jaic
  * URL: vedranjaic.com
  */
@@ -11,19 +11,18 @@
 
 // Settings
 @import "functions";
-@import "variables";
 @import "mixins";
+@import "template";
 @import "helpers";
 @import "placeholders";
 
 // Animations
 @import "animations";
-@import "theme";
 
 // ------------------------------------[ style.css start ]
 
 // Defaults
-@import "template";
+@import "theme";
 @import "typography";
 
 // Pages layout
