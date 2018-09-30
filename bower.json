@@ -1,8 +1,8 @@
 {
   "name": "buildr",
-  "version": "1.0.62",
+  "version": "1.0.63",
   "authors": [
-    "Vedran Jaic <vedran@404.agency>"
+    "Vedran Jaic <info@vedranjaic.com"
   ],
   "description": "App builder template",
   "main": "index.html",

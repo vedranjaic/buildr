@@ -71,10 +71,19 @@
 	}
 }
 
-// Animations
-@mixin transition($property) {
-	transition: $property 300ms cubic-bezier(0.4, 0.0, 0.2, 1);
-	box-sizing: border-box;
+// Transitions
+// https://codepen.io/jordinebot/pen/xEsBr
+@mixin transition($properties, $duration: 300ms, $method: cubic-bezier(0.4, 0.0, 0.2, 1), $delay: 0ms) {
+	$value: ();
+	@each $property in $properties {
+		@if length($value) > 0 {
+			$value: append($value, unquote(",") #{$property} $duration $method $delay);
+		}
+		@else {
+			$value: append($value, #{$property} $duration $method $delay);
+		}
+	}
+	transition: $value;
 }
 
 // Collapser

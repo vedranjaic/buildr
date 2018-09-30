@@ -1,4 +1,4 @@
-# Buildr
+# Buildr v0.63
 Application builder template
 
 ## Installation
@@ -19,5 +19,8 @@ Application builder template
 ### ToDo:
 - gulp-w3cjs [https://www.npmjs.com/package/gulp-w3cjs/](https://www.npmjs.com/package/gulp-w3cjs/)
 
+### v0.63
+- `transition` now accepts multiple properties
+- `:focus` outline - option to change focus outlines for mouse/tab navigation
 ### v0.62
 - `transition` now specifies which property to pass (past: all)

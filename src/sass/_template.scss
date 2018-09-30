@@ -11,9 +11,29 @@ $functional: (
 	red: #ff595e
 );
 
-// Fonts
-$font: Helvetica, Arial, sans-serif;
+// Brand colors
+$brand-color: #abc123;
 
+
+////
+/// Body
+//
 body {
 	font-family: $font;
+
+	// Sizing box model
+	* {
+		box-sizing: border-box;
+	}
+
+	// Anchors
+	a {
+		color: currentColor;
+	}
+
+	// SVG
+	svg {
+		width: auto;
+		height: 100%;
+	}
 }

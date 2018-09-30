@@ -1,33 +1,35 @@
 /*!
  * Project name: MyProject
  * Version: 1.0
- * Boilerplate template: buildr v0.62
+ * Boilerplate template: buildr v0.63
  * Author: Vedran Jaic
  * URL: vedranjaic.com
  */
 
 // Bootstrap
-// @import "bootstrap";
+@import "bootstrap/normalize";
 
 // Settings
 @import "functions";
 @import "mixins";
+// Typography
+@import "typography";
+// Template
 @import "template";
+// Helpers and Extenders
 @import "helpers";
 @import "placeholders";
-
 // Animations
 @import "animations";
 
-// ------------------------------------[ style.css start ]
+// -------------[ style.css start ]
 
 // Defaults
 @import "theme";
-@import "typography";
 
 // Pages layout
 @import "header";
-@import "layout-index";
+@import "layout";
 @import "footer";
 
-// --------------------------------------[ style.css end ]
+// -------------[ style.css end ]

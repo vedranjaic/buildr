@@ -1,6 +1,7 @@
-// Helpers
-*:focus {
-	outline: 0;
+// Focus outline
+// https://twitter.com/i/web/status/1045768279753666562
+:focus:not(:focus-visible) {
+	outline: none
 }
 
 // Clearfix
